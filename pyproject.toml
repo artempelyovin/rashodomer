@@ -16,6 +16,7 @@ dev = [
     "flet-cli>=0.85.2",
     "flet-desktop>=0.85.2",
     "flet-web>=0.85.2",
+    "ruff>=0.15.14",
 ]
 
 [tool.flet]
