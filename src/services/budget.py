@@ -20,14 +20,20 @@ class BudgetService(ABC):
     def list(self) -> list[BudgetModel]: ...
 
     @abstractmethod
-    def update(self, budget_id: str, name: str, description: str, amount: Decimal, is_active: bool) -> BudgetModel: ...
+    def update(
+        self,
+        budget_id: str,
+        name: str,
+        description: str,
+        amount: Decimal,
+        is_active: bool,
+    ) -> BudgetModel: ...
 
     @abstractmethod
     def delete(self, budget_id: int) -> BudgetModel: ...
 
 
 class FileBudgetService(BudgetService):
-
     def __init__(self):
         self.file_path = "budgets.json"
         self._init_storage()
@@ -101,7 +107,14 @@ class FileBudgetService(BudgetService):
         raw_data = self._load()
         return [self._deserialize_model(item) for item in raw_data]
 
-    def update(self, budget_id: str, name: str, description: str, amount: Decimal, is_active: bool) -> BudgetModel:
+    def update(
+        self,
+        budget_id: str,
+        name: str,
+        description: str,
+        amount: Decimal,
+        is_active: bool,
+    ) -> BudgetModel:
         models = self.list()
         updated_model = None
         for i, model in enumerate(models):
