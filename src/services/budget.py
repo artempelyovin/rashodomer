@@ -4,6 +4,7 @@ from abc import ABC, abstractmethod
 from datetime import datetime
 from decimal import Decimal
 
+from services.errors import BudgetNotFound
 from src.models import BudgetModel
 
 
@@ -103,7 +104,7 @@ class FileBudgetService(BudgetService):
         for model in models:
             if model.id == budget_id:
                 return model
-        raise ValueError(f"Budget with id {budget_id} not found")
+        raise BudgetNotFound(f"Budget with id {budget_id} not found")
 
     def list(self) -> list[BudgetModel]:
         raw_data = self._load()
@@ -121,4 +122,4 @@ class FileBudgetService(BudgetService):
                 removed = models.pop(i)
                 self._save([self._serialize_model(m) for m in models])
                 return removed
-        raise ValueError(f"Budget with id {budget_id} not found")
+        raise BudgetNotFound(f"Budget with id {budget_id} not found")
