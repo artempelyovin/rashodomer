@@ -1,6 +1,3 @@
-from datetime import datetime
-from decimal import Decimal
-
 import flet as ft
 from flet import Control
 
@@ -9,25 +6,14 @@ from src.utils import format_datetime
 
 
 @ft.component
-def BudgetEdit() -> Control:
-    params = ft.use_route_params()
-    budget_id = params.get("budget_id")
-    budget = BudgetModel(
-        id=budget_id,
-        name="Наличные/карты",
-        description="Все деньги на руках (наличные/карты)",
-        amount=Decimal(10000),
-        is_active=True,
-        created_at=datetime.now(),
-        updated_at=datetime.now(),
-    )
+def BudgetEdit(budget: BudgetModel) -> Control:
     return ft.Column(
         controls=[
             ft.Text("Редактирование бюджета", size=24),
             ft.Row(
                 controls=[
                     ft.Text("ID:"),
-                    ft.Text(budget_id),
+                    ft.Text(budget.id),
                 ]
             ),
             ft.TextField(label="Название", value=budget.name),

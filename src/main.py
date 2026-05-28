@@ -1,13 +1,16 @@
 import flet as ft
 
-from src.components.budget_edit import BudgetEdit
+from src.pages.budget import BudgetPage
 
 
 @ft.component
 def App():
-    return ft.Router([
-        ft.Route(path="budgets/:budget_id/edit", component=BudgetEdit),
-    ])
+    return ft.Router(
+        [
+            ft.Route(path="budgets/:budget_id/edit", component=BudgetPage),
+        ]
+    )
+
 
 if __name__ == "__main__":
     ft.run(lambda page: page.render(App))
