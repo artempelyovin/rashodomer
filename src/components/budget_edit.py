@@ -1,13 +1,21 @@
+from typing import Callable
+
 import flet as ft
 
 from src.models import BudgetModel
 from src.utils import format_datetime
 
 
-def BudgetEdit(budget: BudgetModel) -> ft.Control:
+def BudgetEdit(budget: BudgetModel, on_cancel: Callable) -> ft.Control:
     return ft.Column(
         controls=[
-            ft.Text("Редактирование бюджета", size=24),
+            ft.Row(
+                [
+                    ft.IconButton(icon=ft.Icons.ARROW_BACK, on_click=on_cancel),
+                    ft.Text("Редактирование бюджета", size=24),
+                    ft.IconButton(icon=ft.Icons.CHECK),  # TODO: callback
+                ]
+            ),
             ft.Row(
                 controls=[
                     ft.Text("ID:"),
