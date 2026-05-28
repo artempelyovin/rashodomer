@@ -1,12 +1,10 @@
 import flet as ft
-from flet import Control
 
 from src.models import BudgetModel
 from src.utils import format_datetime
 
 
-@ft.component
-def BudgetEdit(budget: BudgetModel) -> Control:
+def BudgetEdit(budget: BudgetModel) -> ft.Control:
     return ft.Column(
         controls=[
             ft.Text("Редактирование бюджета", size=24),
