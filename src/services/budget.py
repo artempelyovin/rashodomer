@@ -1,5 +1,6 @@
 import json
 import os
+import uuid
 from abc import ABC, abstractmethod
 from datetime import datetime
 from decimal import Decimal
@@ -73,20 +74,12 @@ class FileBudgetService(BudgetService):
             updated_at=datetime.fromisoformat(data["updated_at"]),
         )
 
-    def _generate_new_id(self, existing_models: list[BudgetModel]) -> str:
-        """Генерирует новый целочисленный ID (как строку)."""
-        if not existing_models:
-            return "1"
-        max_id = max(int(model.id) for model in existing_models)
-        return str(max_id + 1)
-
     def create(self, name: str, description: str, amount: Decimal) -> BudgetModel:
         existing_models = self.list()
-        new_id = self._generate_new_id(existing_models)
         now = datetime.now()
 
         new_model = BudgetModel(
-            id=new_id,
+            id=str(uuid.uuid4()),
             name=name,
             description=description,
             amount=amount,
