@@ -2,6 +2,7 @@ import flet as ft
 
 from services.errors import BudgetNotFound
 from src.components.budget_edit import BudgetEdit
+from src.components.budget_detail import BudgetDetail
 from src.services.budget import FileBudgetService
 from ui_utils import show_error
 
@@ -16,4 +17,4 @@ def BudgetPage() -> ft.Control:
     except BudgetNotFound:
         show_error("Budget not found")
         return ft.context.page.navigate("/budgets")
-    return BudgetEdit(budget=budget)
+    return BudgetDetail(budget=budget)

@@ -7,7 +7,7 @@ from src.pages.budget import BudgetPage
 def App():
     return ft.Router(
         [
-            ft.Route(path="budgets/:budget_id/edit", component=BudgetPage),
+            ft.Route(path="budgets/:budget_id", component=BudgetPage),
         ]
     )
 
