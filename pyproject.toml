@@ -27,3 +27,8 @@ copyright = "Copyright (C) 2023-2026 by Flet"
 
 [tool.flet.app]
 path = "src"
+
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"

@@ -6,25 +6,14 @@ from components.budget_min import BudgetMin
 from models import BudgetModel
 
 
-def BudgetList(
-    budgets: list[BudgetModel], on_budget_click: Callable, on_add_button_click: Callable
-) -> ft.Control:
+def BudgetList(budgets: list[BudgetModel], on_budget_click: Callable, on_add_button_click: Callable) -> ft.Control:
     return ft.Column(
         [
-            ft.Row(
-                [
-                    BudgetMin(
-                        budget=budget, on_click=lambda _: on_budget_click(budget.id)
-                    )
-                    for budget in budgets
-                ]
-            ),
+            ft.Row([BudgetMin(budget=budget, on_click=lambda _: on_budget_click(budget.id)) for budget in budgets]),
             ft.Row(
                 [
                     ft.Container(expand=True),
-                    ft.FloatingActionButton(
-                        icon=ft.Icons.ADD, on_click=on_add_button_click
-                    ),
+                    ft.FloatingActionButton(icon=ft.Icons.ADD, on_click=on_add_button_click),
                 ],
                 alignment=ft.MainAxisAlignment.END,
             ),

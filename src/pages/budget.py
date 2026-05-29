@@ -14,9 +14,7 @@ def BudgetListPage() -> ft.Control:
     budgets = budget_service.list()
     return BudgetList(
         budgets=budgets,
-        on_budget_click=lambda budget_id: ft.context.page.navigate(
-            f"/budgets/{budget_id}"
-        ),
+        on_budget_click=lambda budget_id: ft.context.page.navigate(f"/budgets/{budget_id}"),
         on_add_button_click=lambda _: ft.context.page.navigate(f"/budgets/new"),
     )
 
