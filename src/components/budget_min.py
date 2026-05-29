@@ -3,8 +3,6 @@ from typing import Callable
 import flet as ft
 
 from models import BudgetModel
-from ui_utils import show_error
-from utils import format_time
 
 
 def BudgetMin(budget: BudgetModel, on_click: Callable) -> ft.Control:
@@ -17,12 +15,7 @@ def BudgetMin(budget: BudgetModel, on_click: Callable) -> ft.Control:
     return ft.Container(
         ft.Row(
             [
-                ft.Column(
-                    [
-                        ft.Icon(ft.Icons.MONEY),
-                        ft.Text(format_time(budget.created_at), size=10),
-                    ]
-                ),
+                ft.Icon(ft.Icons.MONEY),
                 ft.Column(
                     [
                         ft.Text(budget.name, weight=ft.FontWeight.BOLD),
