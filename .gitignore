@@ -164,3 +164,6 @@ storage/
 
 # JetBrains
 .idea
+
+# Project-specific
+budgets.json
