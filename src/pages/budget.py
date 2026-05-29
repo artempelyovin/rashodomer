@@ -2,15 +2,15 @@ import flet as ft
 
 from components.budget_edit import BudgetEdit
 from components.budget_list import BudgetList
+from context import BudgetServiceProvider
 from services.errors import BudgetNotFound
 from src.components.budget_detail import BudgetDetail
-from src.services.budget import FileBudgetService
 from ui_utils import show_error
 
 
 @ft.component
 def BudgetListPage() -> ft.Control:
-    budget_service = FileBudgetService()  # TODO: не юзать напрямую реализацию!
+    budget_service = ft.use_context(BudgetServiceProvider)
     budgets = budget_service.list()
     return BudgetList(
         budgets=budgets,
@@ -23,7 +23,7 @@ def BudgetListPage() -> ft.Control:
 def BudgetPage() -> ft.Control:
     params = ft.use_route_params()
     budget_id = params["budget_id"]
-    budget_service = FileBudgetService()  # TODO: не юзать напрямую реализацию!
+    budget_service = ft.use_context(BudgetServiceProvider)
 
     is_editing, set_is_editing = ft.use_state(False)
     try:
