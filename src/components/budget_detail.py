@@ -40,7 +40,7 @@ def BudgetDetail(budget: BudgetModel, on_cancel: Callable, on_edit: Callable) ->
                     ft.Text(str(budget.amount)),
                 ]
             ),
-            ft.Switch(label="Архивирован", value=budget.is_active, disabled=True),
+            ft.Switch(label="Активен", value=budget.is_active, disabled=True),
             ft.Row(
                 [
                     ft.Text("Создано:"),

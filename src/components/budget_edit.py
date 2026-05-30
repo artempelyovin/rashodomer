@@ -51,7 +51,7 @@ def BudgetEdit(budget: BudgetModel, on_cancel: Callable, on_save: Callable) -> f
                 on_change=lambda e: set_amount(e.control.value),
             ),
             ft.Switch(
-                label="Архивирован",
+                label="Активен",
                 value=is_active,
                 on_change=lambda e: set_is_active(e.control.value),
             ),
