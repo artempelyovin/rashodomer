@@ -42,6 +42,12 @@ def BudgetPage() -> ft.Control:
     budget_id = params["budget_id"]
     budget_service = ft.use_context(BudgetServiceProvider)
 
+    def on_save(budget_id: str, name: str, description: str, amount: str, is_active: bool) -> None:
+        budget_service.update(
+            budget_id=budget_id, name=name, description=description, amount=Decimal(amount), is_active=is_active
+        )
+        ft.context.page.navigate("/budgets")
+
     is_editing, set_is_editing = ft.use_state(False)
     try:
         budget = budget_service.get(budget_id)
@@ -49,7 +55,7 @@ def BudgetPage() -> ft.Control:
         show_error("Budget not found")
         return ft.context.page.navigate("/budgets")
     if is_editing:
-        return BudgetEdit(budget=budget, on_cancel=lambda _: set_is_editing(False))
+        return BudgetEdit(budget=budget, on_cancel=lambda _: set_is_editing(False), on_save=on_save)
     else:
         return BudgetDetail(
             budget=budget,

@@ -44,7 +44,7 @@ def BudgetDetail(budget: BudgetModel, on_cancel: Callable, on_edit: Callable) ->
             ft.Row(
                 [
                     ft.Text("Создано:"),
-                    ft.Text(value=format_datetime(budget.updated_at)),
+                    ft.Text(value=format_datetime(budget.created_at)),
                 ]
             ),
             ft.Row(
