@@ -30,7 +30,7 @@ def BudgetEdit(budget: BudgetModel, on_cancel: Callable) -> ft.Control:
                 hint_text="0.00",
                 keyboard_type=ft.KeyboardType.NUMBER,
                 input_filter=ft.InputFilter(regex_string=r"^\d*\.?\d*$", allow=True),
-                text_align=ft.TextAlign.RIGHT,  # суммы обычно выравнивают по правому краю
+                text_align=ft.TextAlign.RIGHT,
             ),
             ft.Switch(label="Архивирован", value=budget.is_active),
             ft.Row(

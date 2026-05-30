@@ -1,5 +1,8 @@
+from decimal import Decimal
+
 import flet as ft
 
+from components.budget_create import BudgetCreate
 from components.budget_edit import BudgetEdit
 from components.budget_list import BudgetList
 from context import BudgetServiceProvider
@@ -16,6 +19,20 @@ def BudgetListPage() -> ft.Control:
         budgets=budgets,
         on_budget_click=lambda budget_id: ft.context.page.navigate(f"/budgets/{budget_id}"),
         on_add_button_click=lambda _: ft.context.page.navigate(f"/budgets/new"),
+    )
+
+
+@ft.component
+def BudgetNewPage() -> ft.Control:
+    budget_service = ft.use_context(BudgetServiceProvider)
+
+    def on_save(name: str, description: str, amount: str) -> None:
+        budget_service.create(name=name, description=description, amount=Decimal(amount))
+        ft.context.page.navigate("/budgets")
+
+    return BudgetCreate(
+        on_cancel=lambda budget_id: ft.context.page.navigate(f"/budgets"),
+        on_save=on_save,
     )
 
 
