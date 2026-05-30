@@ -1,7 +1,6 @@
 import flet as ft
 
-from pages.budget import BudgetCreate, BudgetListPage
-from src.pages.budget import BudgetPage
+from pages.budget import BudgetCreate, BudgetListPage, BudgetPage
 
 
 @ft.component

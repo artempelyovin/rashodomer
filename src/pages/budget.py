@@ -3,11 +3,11 @@ from decimal import Decimal
 import flet as ft
 
 from components.budget_create import BudgetCreate
+from components.budget_detail import BudgetDetail
 from components.budget_edit import BudgetEdit
 from components.budget_list import BudgetList
 from context import BudgetServiceProvider
 from services.errors import BudgetNotFound
-from src.components.budget_detail import BudgetDetail
 from ui_utils import show_error
 
 

@@ -2,8 +2,8 @@ from typing import Callable
 
 import flet as ft
 
-from src.models import BudgetModel
-from src.utils import format_datetime
+from models import BudgetModel
+from utils import format_datetime
 
 
 @ft.component

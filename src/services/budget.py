@@ -5,8 +5,8 @@ from abc import ABC, abstractmethod
 from datetime import datetime
 from decimal import Decimal
 
+from models import BudgetModel
 from services.errors import BudgetNotFound
-from src.models import BudgetModel
 
 
 class BudgetService(ABC):

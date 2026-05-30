@@ -8,11 +8,11 @@ from models import BudgetModel
 
 @ft.component
 def BudgetList(
-        budgets: list[BudgetModel],
-        only_active: bool,
-        on_filter_change: Any,
-        on_budget_click: Callable,
-        on_add_button_click: Callable,
+    budgets: list[BudgetModel],
+    only_active: bool,
+    on_filter_change: Any,
+    on_budget_click: Callable,
+    on_add_button_click: Callable,
 ) -> ft.Control:
     return ft.Column(
         [
