@@ -35,7 +35,6 @@ def CategoryEdit(
                     ft.IconButton(icon=ft.Icons.CHECK, on_click=handle_save),
                 ]
             ),
-            ft.Row([ft.Text("ID:"), ft.Text(category.id)]),
             ft.TextField(
                 label="Название",
                 value=name,

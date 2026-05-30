@@ -3,6 +3,7 @@ from typing import Callable
 import flet as ft
 
 from models import CategoryModel, CategoryType
+from ui_utils import show_success
 from utils import format_datetime
 
 
@@ -17,16 +18,24 @@ def CategoryDetail(
     color = ft.Colors.GREEN if category.type == CategoryType.INCOME else ft.Colors.RED
     type_label = "Доход" if category.type == CategoryType.INCOME else "Расход"
 
+    async def copy_id(_) -> None:
+        await ft.Clipboard().set(category.id)
+        show_success("ID скопирован")
+
     return ft.Column(
         controls=[
             ft.Row(
                 [
                     ft.IconButton(icon=ft.Icons.ARROW_BACK, on_click=on_cancel),
                     ft.Text("Обзор категории", size=24),
+                    ft.IconButton(
+                        icon=ft.Icons.COPY,
+                        tooltip=f"Скопировать ID: {category.id}",
+                        on_click=copy_id,
+                    ),
                     ft.IconButton(icon=ft.Icons.DELETE, on_click=on_delete),
                 ]
             ),
-            ft.Row([ft.Text("ID:"), ft.Text(category.id)]),
             ft.Row([ft.Text("Название:"), ft.Text(category.name)]),
             ft.Row([ft.Text("Описание:"), ft.Text(category.description or "—")]),
             ft.Row(

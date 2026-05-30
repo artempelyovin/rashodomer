@@ -3,24 +3,28 @@ from typing import Callable
 import flet as ft
 
 from models import BudgetModel
+from ui_utils import show_success
 from utils import format_datetime
 
 
 @ft.component
 def BudgetDetail(budget: BudgetModel, on_cancel: Callable, on_edit: Callable, on_delete: Callable) -> ft.Control:
+    async def copy_id(_) -> None:
+        await ft.Clipboard().set(budget.id)
+        show_success("ID скопирован")
+
     return ft.Column(
         controls=[
             ft.Row(
                 [
                     ft.IconButton(icon=ft.Icons.ARROW_BACK, on_click=on_cancel),
                     ft.Text("Обзор бюджета", size=24),
+                    ft.IconButton(
+                        icon=ft.Icons.COPY,
+                        tooltip=f"Скопировать ID: {budget.id}",
+                        on_click=copy_id,
+                    ),
                     ft.IconButton(icon=ft.Icons.DELETE, on_click=on_delete),
-                ]
-            ),
-            ft.Row(
-                [
-                    ft.Text("ID:"),
-                    ft.Text(budget.id),
                 ]
             ),
             ft.Row(

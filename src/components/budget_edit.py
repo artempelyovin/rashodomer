@@ -25,12 +25,6 @@ def BudgetEdit(budget: BudgetModel, on_cancel: Callable, on_save: Callable) -> f
                     ft.IconButton(icon=ft.Icons.CHECK, on_click=handle_save),
                 ]
             ),
-            ft.Row(
-                controls=[
-                    ft.Text("ID:"),
-                    ft.Text(budget.id),
-                ]
-            ),
             ft.TextField(
                 label="Название",
                 value=name,
