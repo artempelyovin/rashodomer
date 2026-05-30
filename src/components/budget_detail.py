@@ -7,13 +7,14 @@ from utils import format_datetime
 
 
 @ft.component
-def BudgetDetail(budget: BudgetModel, on_cancel: Callable, on_edit: Callable) -> ft.Control:
+def BudgetDetail(budget: BudgetModel, on_cancel: Callable, on_edit: Callable, on_delete: Callable) -> ft.Control:
     return ft.Column(
         controls=[
             ft.Row(
                 [
                     ft.IconButton(icon=ft.Icons.ARROW_BACK, on_click=on_cancel),
                     ft.Text("Обзор бюджета", size=24),
+                    ft.IconButton(icon=ft.Icons.DELETE, on_click=on_delete),
                 ]
             ),
             ft.Row(

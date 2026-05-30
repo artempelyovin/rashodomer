@@ -52,6 +52,10 @@ def BudgetPage() -> ft.Control:
         )
         ft.context.page.navigate("/budgets")
 
+    def on_delete() -> None:
+        budget_service.delete(budget_id=budget_id)
+        ft.context.page.navigate("/budgets")
+
     is_editing, set_is_editing = ft.use_state(False)
     try:
         budget = budget_service.get(budget_id)
@@ -65,4 +69,5 @@ def BudgetPage() -> ft.Control:
             budget=budget,
             on_cancel=lambda _: ft.context.page.navigate("/budgets"),
             on_edit=lambda _: set_is_editing(True),
+            on_delete=on_delete,
         )
