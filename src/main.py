@@ -1,6 +1,6 @@
 import flet as ft
 
-from pages.budget import BudgetCreate, BudgetListPage, BudgetPage
+from pages.budget import BudgetCreatePage, BudgetListPage, BudgetPage
 
 
 @ft.component
@@ -8,7 +8,7 @@ def App():
     return ft.Router(
         [
             ft.Route(path="budgets", component=BudgetListPage),
-            ft.Route(path="budgets/new", component=BudgetCreate),
+            ft.Route(path="budgets/new", component=BudgetCreatePage),
             ft.Route(path="budgets/:budget_id", component=BudgetPage),
         ]
     )

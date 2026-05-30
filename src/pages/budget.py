@@ -27,7 +27,7 @@ def BudgetListPage() -> ft.Control:
 
 
 @ft.component
-def BudgetNewPage() -> ft.Control:
+def BudgetCreatePage() -> ft.Control:
     budget_service = ft.use_context(BudgetServiceProvider)
 
     def on_save(name: str, description: str, amount: str) -> None:
