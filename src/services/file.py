@@ -115,15 +115,13 @@ class FileBudgetService(BudgetService):
         return updated_model
 
     def delete(self, budget_id: str) -> BudgetModel:
-        str_id = budget_id
         models = self.list()
         for i, model in enumerate(models):
-            if model.id == str_id:
+            if model.id == budget_id:
                 removed = models.pop(i)
                 self._save([self._serialize_model(m) for m in models])
                 return removed
         raise BudgetNotFound(budget_id)
-
 
 class FileCategoryService(CategoryService):
     def __init__(self):
