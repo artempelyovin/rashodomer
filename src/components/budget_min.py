@@ -1,3 +1,4 @@
+from decimal import Decimal
 from typing import Callable
 
 import flet as ft
@@ -7,12 +8,15 @@ from models import BudgetModel
 
 @ft.component
 def BudgetMin(budget: BudgetModel, on_click: Callable) -> ft.Control:
-    if budget.amount >= 0:
+    if budget.amount == Decimal(0):
+        amount_color = ft.Colors.GREY
+        amount_str = f"{budget.amount}₽"
+    elif budget.amount > Decimal(0):
         amount_color = ft.Colors.GREEN
-        amount_sign = "+"
+        amount_str = f"+{budget.amount}₽"
     else:
         amount_color = ft.Colors.RED
-        amount_sign = "-"
+        amount_str = f"{budget.amount}₽"  # минус уже есть в числе
     return ft.Container(
         ft.Row(
             [
@@ -25,7 +29,7 @@ def BudgetMin(budget: BudgetModel, on_click: Callable) -> ft.Control:
                     spacing=0,
                     alignment=ft.MainAxisAlignment.START,
                 ),
-                ft.Text(f"{amount_sign}{budget.amount}₽", color=amount_color, size=20),
+                ft.Text(amount_str, color=amount_color, size=20),
             ]
         ),
         padding=10,

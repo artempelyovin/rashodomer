@@ -46,7 +46,7 @@ def BudgetEdit(budget: BudgetModel, on_cancel: Callable, on_save: Callable) -> f
                 label="Сумма",
                 hint_text="0.00",
                 keyboard_type=ft.KeyboardType.NUMBER,
-                input_filter=ft.InputFilter(regex_string=r"^\d*\.?\d*$", allow=True),
+                input_filter=ft.InputFilter(regex_string=r"^\-?\d*\.?\d*$", allow=True),
                 text_align=ft.TextAlign.RIGHT,
                 on_change=lambda e: set_amount(e.control.value),
             ),
