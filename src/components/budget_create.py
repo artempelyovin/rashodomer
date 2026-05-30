@@ -7,7 +7,7 @@ import flet as ft
 def BudgetCreate(on_cancel: Callable, on_save: Callable) -> ft.Control:
     name, set_name = ft.use_state("")
     description, set_description = ft.use_state("")
-    amount, set_amount = ft.use_state("")
+    amount, set_amount = ft.use_state(0.0)
 
     def handle_save():
         on_save(name=name, description=description, amount=amount)
@@ -33,7 +33,7 @@ def BudgetCreate(on_cancel: Callable, on_save: Callable) -> ft.Control:
             ),
             ft.TextField(
                 label="Сумма",
-                value=amount,
+                value=str(amount),
                 on_change=lambda e: set_amount(e.control.value),
                 keyboard_type=ft.KeyboardType.NUMBER,
                 input_filter=ft.InputFilter(regex_string=r"^\d*\.?\d*$", allow=True),
