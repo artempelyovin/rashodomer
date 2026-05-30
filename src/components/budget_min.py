@@ -5,6 +5,7 @@ import flet as ft
 from models import BudgetModel
 
 
+@ft.component
 def BudgetMin(budget: BudgetModel, on_click: Callable) -> ft.Control:
     if budget.amount >= 0:
         amount_color = ft.Colors.GREEN

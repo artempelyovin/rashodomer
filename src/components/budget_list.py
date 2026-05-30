@@ -6,6 +6,7 @@ from components.budget_min import BudgetMin
 from models import BudgetModel
 
 
+@ft.component
 def BudgetList(budgets: list[BudgetModel], on_budget_click: Callable, on_add_button_click: Callable) -> ft.Control:
     return ft.Column(
         [

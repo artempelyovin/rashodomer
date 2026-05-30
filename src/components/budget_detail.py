@@ -6,6 +6,7 @@ from src.models import BudgetModel
 from src.utils import format_datetime
 
 
+@ft.component
 def BudgetDetail(budget: BudgetModel, on_cancel: Callable, on_edit: Callable) -> ft.Control:
     return ft.Column(
         controls=[

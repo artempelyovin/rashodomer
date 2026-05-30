@@ -1,6 +1,7 @@
 import flet as ft
 
 
+@ft.component
 def Error(message: str) -> ft.Control:
     return ft.SnackBar(
         content=ft.Row(
