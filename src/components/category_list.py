@@ -6,7 +6,7 @@ from models import CategoryModel, CategoryType
 
 
 @ft.component
-def CategoryMin(category: CategoryModel, on_click: Callable) -> ft.Control:
+def CategoryListItem(category: CategoryModel, on_click: Callable) -> ft.Control:
     icon = ft.Icons.ARROW_UPWARD if category.type == CategoryType.INCOME else ft.Icons.ARROW_DOWNWARD
     color = ft.Colors.GREEN if category.type == CategoryType.INCOME else ft.Colors.RED
 
@@ -38,7 +38,7 @@ def CategoryList(
     on_type_change: Callable,
     on_filter_change: Callable,
     on_category_click: Callable,
-    on_add_button_click: Callable,
+    on_add_click: Callable,
 ) -> ft.Control:
     def tab_style(active: bool) -> ft.ButtonStyle:
         return ft.ButtonStyle(
@@ -75,7 +75,7 @@ def CategoryList(
             ),
             ft.Column(
                 [
-                    CategoryMin(
+                    CategoryListItem(
                         category=category,
                         on_click=lambda _, c=category: on_category_click(c.id),
                     )
@@ -85,7 +85,7 @@ def CategoryList(
             ft.Row(
                 [
                     ft.Container(expand=True),
-                    ft.FloatingActionButton(icon=ft.Icons.ADD, on_click=on_add_button_click),
+                    ft.FloatingActionButton(icon=ft.Icons.ADD, on_click=on_add_click),
                 ],
             ),
         ]

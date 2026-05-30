@@ -22,7 +22,7 @@ def BudgetListPage() -> ft.Control:
         only_active=only_active,
         on_filter_change=set_only_active,
         on_budget_click=lambda budget_id: navigate(f"/budgets/{budget_id}"),
-        on_add_button_click=lambda _: navigate(f"/budgets/new"),
+        on_add_click=lambda _: navigate("/budgets/new"),
     )
 
 
@@ -35,7 +35,7 @@ def BudgetCreatePage() -> ft.Control:
         navigate("/budgets")
 
     return BudgetCreate(
-        on_cancel=lambda budget_id: navigate(f"/budgets"),
+        on_cancel=lambda _: navigate("/budgets"),
         on_save=on_save,
     )
 
@@ -62,7 +62,7 @@ def BudgetPage() -> ft.Control:
     except BudgetNotFound as e:
         show_error(str(e))
         navigate("/budgets")
-        return ft.Container()  # stub
+        return ft.Container()
     if is_editing:
         return BudgetEdit(budget=budget, on_cancel=lambda _: set_is_editing(False), on_save=on_save)
     else:

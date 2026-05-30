@@ -26,7 +26,7 @@ def CategoryListPage() -> ft.Control:
         on_type_change=set_category_type,
         on_filter_change=set_only_active,
         on_category_click=lambda category_id: navigate(f"/categories/{category_id}"),
-        on_add_button_click=lambda _: navigate("/categories/new"),
+        on_add_click=lambda _: navigate("/categories/new"),
     )
 
 

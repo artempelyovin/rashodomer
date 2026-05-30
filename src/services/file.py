@@ -123,6 +123,7 @@ class FileBudgetService(BudgetService):
                 return removed
         raise BudgetNotFound(budget_id)
 
+
 class FileCategoryService(CategoryService):
     def __init__(self):
         self.file_path = "categories.json"
