@@ -17,7 +17,7 @@ class BudgetService(ABC):
     def get(self, budget_id: str) -> BudgetModel: ...
 
     @abstractmethod
-    def list(self) -> list[BudgetModel]: ...
+    def list(self, only_active: bool = False, only_inactive: bool = False) -> list[BudgetModel]: ...
 
     @abstractmethod
     def update(
@@ -103,9 +103,12 @@ class FileBudgetService(BudgetService):
                 return model
         raise BudgetNotFound(f"Budget with id {budget_id} not found")
 
-    def list(self) -> list[BudgetModel]:
+    def list(self, only_active: bool = False) -> list[BudgetModel]:
         raw_data = self._load()
-        return [self._deserialize_model(item) for item in raw_data]
+        models = [self._deserialize_model(item) for item in raw_data]
+        if only_active:
+            models = [model for model in models if model.is_active]
+        return models
 
     def update(
         self,

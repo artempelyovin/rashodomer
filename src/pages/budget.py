@@ -14,9 +14,13 @@ from ui_utils import show_error
 @ft.component
 def BudgetListPage() -> ft.Control:
     budget_service = ft.use_context(BudgetServiceProvider)
-    budgets = budget_service.list()
+
+    only_active, set_only_active = ft.use_state(True)
+    budgets = budget_service.list(only_active=only_active)
     return BudgetList(
         budgets=budgets,
+        only_active=only_active,
+        on_filter_change=set_only_active,
         on_budget_click=lambda budget_id: ft.context.page.navigate(f"/budgets/{budget_id}"),
         on_add_button_click=lambda _: ft.context.page.navigate(f"/budgets/new"),
     )
