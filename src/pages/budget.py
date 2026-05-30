@@ -59,8 +59,8 @@ def BudgetPage() -> ft.Control:
     is_editing, set_is_editing = ft.use_state(False)
     try:
         budget = budget_service.get(budget_id)
-    except BudgetNotFound:
-        show_error("Budget not found")
+    except BudgetNotFound as e:
+        show_error(str(e))
         return ft.context.page.navigate("/budgets")
     if is_editing:
         return BudgetEdit(budget=budget, on_cancel=lambda _: set_is_editing(False), on_save=on_save)

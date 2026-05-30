@@ -54,8 +54,8 @@ def CategoryPage() -> ft.Control:
 
     try:
         category = category_service.get(category_id)
-    except CategoryNotFound:
-        show_error("Категория не найдена")
+    except CategoryNotFound as e:
+        show_error(str(e))
         return ft.context.page.navigate("/categories")
 
     def on_save(category_id: str, name: str, description: str, category_type: CategoryType, is_active: bool) -> None:

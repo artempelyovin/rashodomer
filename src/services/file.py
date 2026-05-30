@@ -77,7 +77,7 @@ class FileBudgetService(BudgetService):
         for model in models:
             if model.id == budget_id:
                 return model
-        raise BudgetNotFound(f"Budget with id {budget_id} not found")
+        raise BudgetNotFound(budget_id)
 
     def list(self, only_active: bool = False) -> list[BudgetModel]:
         raw_data = self._load()
@@ -110,7 +110,7 @@ class FileBudgetService(BudgetService):
                 models[i] = updated_model
                 break
         if updated_model is None:
-            raise BudgetNotFound(f"Budget with id {budget_id} not found")
+            raise BudgetNotFound(budget_id)
         self._save([self._serialize_model(m) for m in models])
         return updated_model
 
@@ -122,7 +122,7 @@ class FileBudgetService(BudgetService):
                 removed = models.pop(i)
                 self._save([self._serialize_model(m) for m in models])
                 return removed
-        raise BudgetNotFound(f"Budget with id {budget_id} not found")
+        raise BudgetNotFound(budget_id)
 
 
 class FileCategoryService(CategoryService):
@@ -188,7 +188,7 @@ class FileCategoryService(CategoryService):
         for model in self.list():
             if model.id == category_id:
                 return model
-        raise CategoryNotFound(f"Category with id {category_id} not found")
+        raise CategoryNotFound(category_id)
 
     def list(
         self,
@@ -226,7 +226,7 @@ class FileCategoryService(CategoryService):
                 models[i] = updated_model
                 break
         if updated_model is None:
-            raise CategoryNotFound(f"Category with id {category_id} not found")
+            raise CategoryNotFound(category_id)
         self._save([self._serialize_model(m) for m in models])
         return updated_model
 
@@ -237,4 +237,4 @@ class FileCategoryService(CategoryService):
                 models.pop(i)
                 self._save([self._serialize_model(m) for m in models])
                 return
-        raise CategoryNotFound(f"Category with id {category_id} not found")
+        raise CategoryNotFound(category_id)
