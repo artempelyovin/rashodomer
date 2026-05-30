@@ -58,7 +58,7 @@ def BudgetEdit(budget: BudgetModel, on_cancel: Callable, on_save: Callable) -> f
             ft.Row(
                 [
                     ft.Text("Создано:"),
-                    ft.Text(value=format_datetime(budget.updated_at)),
+                    ft.Text(value=format_datetime(budget.created_at)),
                 ]
             ),
             ft.Row(
