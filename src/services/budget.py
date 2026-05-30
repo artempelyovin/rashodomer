@@ -30,7 +30,7 @@ class BudgetService(ABC):
     ) -> BudgetModel: ...
 
     @abstractmethod
-    def delete(self, budget_id: int) -> BudgetModel: ...
+    def delete(self, budget_id: str) -> BudgetModel: ...
 
 
 class FileBudgetService(BudgetService):
@@ -138,8 +138,8 @@ class FileBudgetService(BudgetService):
         self._save([self._serialize_model(m) for m in models])
         return updated_model
 
-    def delete(self, budget_id: int) -> BudgetModel:
-        str_id = str(budget_id)
+    def delete(self, budget_id: str) -> BudgetModel:
+        str_id = budget_id
         models = self.list()
         for i, model in enumerate(models):
             if model.id == str_id:
