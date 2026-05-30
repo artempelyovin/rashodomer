@@ -29,3 +29,7 @@ def show_success(message: str) -> None:
             duration=2000,
         )
     )
+
+
+def navigate(route: str) -> None:
+    return ft.context.page.navigate(route)

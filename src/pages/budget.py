@@ -8,7 +8,7 @@ from components.budget_edit import BudgetEdit
 from components.budget_list import BudgetList
 from context import BudgetServiceProvider
 from services.errors import BudgetNotFound
-from ui_utils import show_error
+from ui_utils import navigate, show_error
 
 
 @ft.component
@@ -21,8 +21,8 @@ def BudgetListPage() -> ft.Control:
         budgets=budgets,
         only_active=only_active,
         on_filter_change=set_only_active,
-        on_budget_click=lambda budget_id: ft.context.page.navigate(f"/budgets/{budget_id}"),
-        on_add_button_click=lambda _: ft.context.page.navigate(f"/budgets/new"),
+        on_budget_click=lambda budget_id: navigate(f"/budgets/{budget_id}"),
+        on_add_button_click=lambda _: navigate(f"/budgets/new"),
     )
 
 
@@ -32,10 +32,10 @@ def BudgetCreatePage() -> ft.Control:
 
     def on_save(name: str, description: str, amount: str) -> None:
         budget_service.create(name=name, description=description, amount=Decimal(amount))
-        ft.context.page.navigate("/budgets")
+        navigate("/budgets")
 
     return BudgetCreate(
-        on_cancel=lambda budget_id: ft.context.page.navigate(f"/budgets"),
+        on_cancel=lambda budget_id: navigate(f"/budgets"),
         on_save=on_save,
     )
 
@@ -50,24 +50,25 @@ def BudgetPage() -> ft.Control:
         budget_service.update(
             budget_id=budget_id, name=name, description=description, amount=Decimal(amount), is_active=is_active
         )
-        ft.context.page.navigate("/budgets")
+        navigate("/budgets")
 
     def on_delete() -> None:
         budget_service.delete(budget_id=budget_id)
-        ft.context.page.navigate("/budgets")
+        navigate("/budgets")
 
     is_editing, set_is_editing = ft.use_state(False)
     try:
         budget = budget_service.get(budget_id)
     except BudgetNotFound as e:
         show_error(str(e))
-        return ft.context.page.navigate("/budgets")
+        navigate("/budgets")
+        return ft.Container()  # stub
     if is_editing:
         return BudgetEdit(budget=budget, on_cancel=lambda _: set_is_editing(False), on_save=on_save)
     else:
         return BudgetDetail(
             budget=budget,
-            on_cancel=lambda _: ft.context.page.navigate("/budgets"),
+            on_cancel=lambda _: navigate("/budgets"),
             on_edit=lambda _: set_is_editing(True),
             on_delete=on_delete,
         )

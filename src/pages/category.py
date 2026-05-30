@@ -7,7 +7,7 @@ from components.category_list import CategoryList
 from context import CategoryServiceProvider
 from models import CategoryType
 from services.errors import CategoryNotFound
-from ui_utils import show_error
+from ui_utils import navigate, show_error
 
 
 @ft.component
@@ -25,8 +25,8 @@ def CategoryListPage() -> ft.Control:
         only_active=only_active,
         on_type_change=set_category_type,
         on_filter_change=set_only_active,
-        on_category_click=lambda category_id: ft.context.page.navigate(f"/categories/{category_id}"),
-        on_add_button_click=lambda _: ft.context.page.navigate("/categories/new"),
+        on_category_click=lambda category_id: navigate(f"/categories/{category_id}"),
+        on_add_button_click=lambda _: navigate("/categories/new"),
     )
 
 
@@ -36,10 +36,10 @@ def CategoryCreatePage() -> ft.Control:
 
     def on_save(name: str, description: str, category_type: CategoryType) -> None:
         category_service.create(name=name, description=description, category_type=category_type)
-        ft.context.page.navigate("/categories")
+        navigate("/categories")
 
     return CategoryCreate(
-        on_cancel=lambda _: ft.context.page.navigate("/categories"),
+        on_cancel=lambda _: navigate("/categories"),
         on_save=on_save,
     )
 
@@ -56,7 +56,7 @@ def CategoryPage() -> ft.Control:
         category = category_service.get(category_id)
     except CategoryNotFound as e:
         show_error(str(e))
-        return ft.context.page.navigate("/categories")
+        return navigate("/categories")
 
     def on_save(category_id: str, name: str, description: str, category_type: CategoryType, is_active: bool) -> None:
         category_service.update(
@@ -66,11 +66,11 @@ def CategoryPage() -> ft.Control:
             category_type=category_type,
             is_active=is_active,
         )
-        ft.context.page.navigate("/categories")
+        navigate("/categories")
 
     def on_delete() -> None:
         category_service.delete(category_id=category_id)
-        ft.context.page.navigate("/categories")
+        navigate("/categories")
 
     if is_editing:
         return CategoryEdit(
@@ -81,7 +81,7 @@ def CategoryPage() -> ft.Control:
     else:
         return CategoryDetail(
             category=category,
-            on_cancel=lambda _: ft.context.page.navigate("/categories"),
+            on_cancel=lambda _: navigate("/categories"),
             on_edit=lambda _: set_is_editing(True),
             on_delete=on_delete,
         )
