@@ -4,3 +4,7 @@ class BaseServiceError(Exception):
 
 class BudgetNotFound(BaseServiceError):
     pass
+
+
+class CategoryNotFound(BaseServiceError):
+    pass
